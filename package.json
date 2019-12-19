@@ -1,0 +1,10 @@
+{
+  "name": "vue-doc-generator",
+  "version": "1.0.0",
+  "description": "Generate a documentdation for your Vue components",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Naomi PAULMIN (NaoSup)",
+  "license": "MIT"
+}
