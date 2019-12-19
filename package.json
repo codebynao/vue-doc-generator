@@ -3,7 +3,18 @@
   "version": "1.0.0",
   "description": "Generate a documentdation for your Vue components",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint:check": "eslint --ext .js, .",
+    "eslint:fix": "eslint --fix --ext .js, .",
+    "lint:check": "npm run prettier:check && npm run eslint:check",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
+    "prettier:check": "prettier --check \"./**/*.js\"",
+    "prettier:fix": "prettier --write \"./**/*.js\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:fix",
+      "pre-push": "npm run lint:check"
+    }
   },
   "author": "Naomi PAULMIN (NaoSup)",
   "license": "MIT",
@@ -12,6 +23,7 @@
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^3.1.0",
     "prettier": "^1.19.1"
   }
 }
