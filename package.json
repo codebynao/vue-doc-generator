@@ -7,8 +7,14 @@
     "eslint:fix": "eslint --fix --ext .js, .",
     "lint:check": "npm run prettier:check && npm run eslint:check",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
-    "prettier:check": "prettier --check \"./**/*.js\"",
-    "prettier:fix": "prettier --write \"./**/*.js\""
+    "prettier:check": "prettier --check \"./*.js\"",
+    "prettier:fix": "prettier --write \"./*.js\"",
+    "test": "jest",
+    "build": "node scripts/index.js",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },
+  "bin": {
+    "vdoc": "./index.js"
   },
   "husky": {
     "hooks": {
@@ -18,12 +24,26 @@
   },
   "author": "Naomi PAULMIN (NaoSup)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "fs": "0.0.1-security",
+    "minimalist": "^1.0.0"
+  },
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^3.1.0",
+    "jest": "^24.9.0",
     "prettier": "^1.19.1"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plmnao/vue-doc-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/plmnao/vue-doc-generator/issues"
+  },
+  "homepage": "https://github.com/plmnao/vue-doc-generator#readme"
 }
