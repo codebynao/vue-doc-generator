@@ -2,6 +2,7 @@
 
 const cli = require('./cli')
 const init = require('./init')
+const run = require('./run')
 
 const argv = require('minimist')(process.argv.slice(2))
 
@@ -23,6 +24,9 @@ switch (cmd) {
     break
   case 'version':
     cli.getVersion()
+    break
+  case 'run':
+    run.getVueFiles()
     break
   default:
     console.error(`"${cmd}" is not a valid command!`)
