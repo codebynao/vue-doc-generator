@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 const cli = require('./cli')
+const init = require('./init')
 
 const argv = require('minimist')(process.argv.slice(2))
 
@@ -18,7 +19,7 @@ switch (cmd) {
     cli.showHelp(argv)
     break
   case 'init':
-    init.init()
+    init.init(argv)
     break
   case 'version':
     cli.getVersion()
