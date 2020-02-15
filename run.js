@@ -1,7 +1,7 @@
 const chalk = require('chalk')
-const cli = require('./cli')
 const fs = require('fs')
 const path = require('path')
+const vuedoc = require('@vuedoc/parser')
 
 /**
  * Find all Vue files in a directory and sub directories
@@ -58,7 +58,33 @@ const getVueFiles = () => {
   }
 
   // Get all Vue files
-  const files = findVueFiles(path)
+  return findVueFiles(path)
 }
 
-module.exports = { getVueFiles }
+/**
+ * Read files to extract properties
+ * @param {Array} files
+ */
+const parseVueFiles = async files => {
+  const parsed = []
+  for (const file of files) {
+    console.info('file =========>', file)
+    const componentData = {}
+    const fileContent = fs.readFileSync(file, 'utf-8')
+
+    parsed.push(
+      await vuedoc.parse({
+        filecontent: fileContent
+      })
+    )
+  }
+  return parsed
+}
+
+const generateDoc = async () => {
+  const files = getVueFiles()
+  const parsedFiles = await parseVueFiles(files)
+  console.log(parsedFiles)
+}
+
+module.exports = { generateDoc }
