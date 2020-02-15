@@ -26,7 +26,7 @@ switch (cmd) {
     cli.getVersion()
     break
   case 'run':
-    run.getVueFiles()
+    run.generateDoc()
     break
   default:
     console.error(`"${cmd}" is not a valid command!`)
