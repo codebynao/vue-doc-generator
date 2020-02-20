@@ -10,14 +10,27 @@ const getVersion = () => {
 const showHelp = argv => {
   const menus = {
     main: `
-  ${chalk.magentaBright('vdoc [command] <options>')}
-  ${chalk.blueBright(
+  Usage:
+
+  ${chalk.blueBright('vdoc [command] <options>')}
+
+  Options:
+
+  -v --version              output the version number
+  -h --help                 output usage information
+
+  Commands:
+
+  ${chalk.green(
     'help'
-  )} ............... show help menu for a command
-  ${chalk.blueBright('version')} ............ show package version
-  ${chalk.blueBright(
+  )}                      Show help menu for a command
+  ${chalk.green('version')}                   Show package version
+  ${chalk.green(
     'init'
-  )} ................ initialize vdoc config file
+  )}                      Initialize vdoc config file
+  ${chalk.green(
+    'run'
+  )}                       Generate vue documentation
 `,
     init: `TODO`
   }
