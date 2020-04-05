@@ -2,7 +2,7 @@
   "extends": ["plugin:prettier/recommended"],
 
   "plugins": ["prettier"],
-
+  "ignorePatterns": ["node_modules/", "render/"],
   "rules": {
     "prettier/prettier": "error"
   },

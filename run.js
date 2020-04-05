@@ -2,7 +2,7 @@ const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
 const vuedoc = require('@vuedoc/parser')
-
+const { exec } = require('child_process')
 /**
  * Find all Vue files in a directory and sub directories
  * @param {String} dirPath
@@ -70,13 +70,29 @@ const parseVueFiles = async files => {
   for (const file of files) {
     console.info('file =========>', file)
     const componentData = {}
-    const fileContent = fs.readFileSync(file, 'utf-8')
+    const filecontent = fs.readFileSync(file, 'utf-8')
 
-    parsed.push(
-      await vuedoc.parse({
-        filecontent: fileContent
-      })
-    )
+    const parsedFile = await vuedoc.parse({ filecontent })
+    const dirnamePath = path.dirname(file)
+
+    parsedFile.path = dirnamePath
+
+    if (parsedFile.name) {
+      parsed.push(parsedFile)
+      continue
+    }
+
+    const basename = path.basename(file, path.extname(file))
+    if (basename.toLowerCase() !== 'index') {
+      parsedFile.filename = basename
+    } else {
+      const directories = dirnamePath.split(/\\|\//)
+      parsedFile.filename = directories.length
+        ? directories[directories.length - 1]
+        : basename
+    }
+
+    parsed.push(parsedFile)
   }
   return parsed
 }
@@ -84,7 +100,24 @@ const parseVueFiles = async files => {
 const generateDoc = async () => {
   const files = getVueFiles()
   const parsedFiles = await parseVueFiles(files)
-  console.log(parsedFiles)
+
+  const json = JSON.stringify({ components: parsedFiles })
+  try {
+    fs.writeFileSync(
+      __dirname + '/render/src/vuedoc.components.json',
+      json
+    )
+
+    const child = exec('npm run serve', {
+      cwd: __dirname + '/render'
+    })
+
+    child.stdout.on('data', function(data) {
+      console.log(data.toString())
+    })
+  } catch (e) {
+    console.log('Cannot write file ', e)
+  }
 }
 
 module.exports = { generateDoc }

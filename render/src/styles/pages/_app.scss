@@ -1,0 +1,41 @@
+h3 .hash {
+  color: #42b983;
+
+  font-size: 1.2em;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.component {
+  margin-top: 50px;
+
+  h4 {
+    margin: 25px 0 1.2em;
+    line-height: 1.2;
+    position: relative;
+  }
+  ul {
+    padding-left: 1.25em;
+    line-height: 1.4em;
+
+    li {
+      padding-bottom: 0;
+      margin: 1.2em 0;
+    }
+  }
+  .component__variable,
+  .component__variable-item {
+    font-weight: bold;
+  }
+
+  code,
+  pre {
+    color: #d63200;
+    padding: 3px 5px;
+    margin: 0 2px;
+    border-radius: 2px;
+  }
+  code: {
+    white-space: nowrap;
+  }
+}
